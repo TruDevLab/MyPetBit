@@ -1,0 +1,9 @@
+# Kimi CLI — в ~/.kimi/config.toml. Kimi Code — в ~/.kimi-code/config.toml, там вместо UserPromptSubmit событие TurnStarted
+# и ещё можно добавить PermissionRequest (запрос разрешения).
+[[hooks]]
+event = "UserPromptSubmit"
+command = "/Applications/MyPetBit.app/Contents/MacOS/MyPetBit --agent-hook kimi"
+
+[[hooks]]
+event = "Stop"
+command = "/Applications/MyPetBit.app/Contents/MacOS/MyPetBit --agent-hook kimi"

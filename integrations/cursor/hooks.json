@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeSubmitPrompt": [{ "command": "/Applications/MyPetBit.app/Contents/MacOS/MyPetBit --agent-hook cursor", "timeout": 5 }],
+    "stop": [{ "command": "/Applications/MyPetBit.app/Contents/MacOS/MyPetBit --agent-hook cursor", "timeout": 5 }]
+  }
+}

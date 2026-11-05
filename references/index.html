@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MyPetBit — референсы</title>
+<style>
+  :root {
+    --bg: #F6F7F9; --card: #FFFFFF; --text: #1B1F2A; --muted: #6B7385; --line: #E4E7EC;
+    --chip: #EEF0F4; --chip-on: #1B1F2A; --chip-on-text: #FFFFFF;
+    --stage-light: #ECEEF2; --stage-dark: #1D2129;
+    --stage-wall: linear-gradient(135deg, #8EC5FC 0%, #E0C3FC 55%, #FBD3A8 100%);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12151B; --card: #1A1E26; --text: #E8EBF1; --muted: #8E97A8; --line: #2A303B;
+      --chip: #232833; --chip-on: #E8EBF1; --chip-on-text: #12151B;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12151B; --card: #1A1E26; --text: #E8EBF1; --muted: #8E97A8; --line: #2A303B;
+    --chip: #232833; --chip-on: #E8EBF1; --chip-on-text: #12151B;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 1180px; margin: 0 auto; padding: 32px 16px 56px; }
+  h1 { font-size: 26px; margin: 0 0 4px; letter-spacing: -.01em; }
+  .lead { color: var(--muted); margin: 0 0 24px; max-width: 760px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-bottom: 24px; }
+  .control-label { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 6px; }
+  .seg { display: inline-flex; flex-wrap: wrap; gap: 4px; background: var(--chip); padding: 4px; border-radius: 12px; }
+  .seg button {
+    border: 0; background: transparent; color: var(--text); font: inherit; font-size: 14px;
+    padding: 6px 12px; border-radius: 9px; cursor: pointer;
+  }
+  .seg button[aria-pressed="true"] { background: var(--chip-on); color: var(--chip-on-text); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column; }
+  .stage { height: 280px; display: grid; place-items: center; background: var(--stage-light); transition: background .3s; }
+  body[data-stage="dark"] .stage { background: var(--stage-dark); }
+  body[data-stage="wall"] .stage { background: var(--stage-wall); }
+  .stage .pet { width: 220px; height: 220px; cursor: pointer; }
+  .body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .name { display: flex; align-items: baseline; gap: 10px; }
+  .name h2 { margin: 0; font-size: 22px; }
+  .name span { color: var(--muted); font-size: 14px; }
+  .body p { margin: 0; }
+  .states { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .states figure { margin: 0; text-align: center; background: var(--chip); border-radius: 12px; padding: 4px 2px 6px; }
+  .states svg { width: 100%; height: auto; display: block; }
+  .states figcaption { font-size: 12px; color: var(--muted); }
+  .palette { display: flex; gap: 6px; }
+  .palette i { width: 26px; height: 26px; border-radius: 8px; border: 1px solid var(--line); }
+  dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 14px; }
+  dt { color: var(--muted); }
+  dd { margin: 0; }
+  .foot { color: var(--muted); font-size: 13px; margin-top: 24px; }
+</style>
+<script src="pets.js"></script>
+</head>
+<body data-stage="light">
+<main>
+  <h1>MyPetBit — три референса питомца</h1>
+  <p class="lead">Милый, технологичный, минималистичный: простые формы, один акцентный цвет, эмоции через глаза и свет.
+    Нажмите на питомца — он обрадуется. Переключатели ниже показывают состояния и то, как персонаж смотрится на разных обоях.</p>
+
+  <div class="controls">
+    <div>
+      <div class="control-label">Состояние</div>
+      <div class="seg" id="state-seg">
+        <button data-v="idle" aria-pressed="true">Обычный</button>
+        <button data-v="happy">Радость</button>
+        <button data-v="sleep">Сон</button>
+        <button data-v="work">Работает</button>
+      </div>
+    </div>
+    <div>
+      <div class="control-label">Рабочий стол</div>
+      <div class="seg" id="stage-seg">
+        <button data-v="light" aria-pressed="true">Светлый</button>
+        <button data-v="dark">Тёмный</button>
+        <button data-v="wall">Обои</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+  <p class="foot">Исходники персонажей — <code>pets.js</code>, отдельные SVG — в <code>svg/</code> (собирает <code>tools/export-svg.js</code>). Идеи функционала — <code>ИДЕИ.md</code> в корне проекта.</p>
+</main>
+
+<script>
+  const INFO = {
+    bit: {
+      name: 'Бит', tag: 'маленький монитор',
+      text: 'Карманный компьютер с лицом на экране. Эмоции рисуются прямо на дисплее, поэтому на нём же удобно показывать информацию: таймер, прогресс, иконку уведомления. Антенна — индикатор состояния.',
+      plus: 'экран = место для данных; проще всего рисовать новые эмоции',
+      risk: 'жанр «робот-монитор» популярен, нужна своя деталь (антенна, ушки-динамики)',
+      palette: ['#F4F5F7', '#1B1F2A', '#5CF2E0', '#FF7A6B']
+    },
+    flu: {
+      name: 'Флу', tag: 'капля света с орбитой',
+      text: 'Мягкое светящееся существо, похожее на маленькую планету. Самый тёплый и «живой» вариант: тело хорошо сжимается и растягивается, реакции выглядят мягко. Спутник на кольце — индикатор уведомлений.',
+      plus: 'самый эмоциональный, хорошо анимируется',
+      risk: 'мало места под информацию; свечение надо приглушать на светлых обоях',
+      palette: ['#E6DEFF', '#A897FF', '#6F5EF0', '#231C4A', '#FF8FB8']
+    },
+    neko: {
+      name: 'Нэко', tag: 'кот-дрон',
+      text: 'Парящая кошачья голова с визором и светодиодными глазами, вместо лап — двигатель. Узнаваемый силуэт по ушам, визор даёт «техно»-эмоции: сканер, мигание, бегущая строка.',
+      plus: 'узнаваемый силуэт, видно и на светлых, и на тёмных обоях',
+      risk: 'тёмный корпус теряется на тёмном фоне — держим светлый контур',
+      palette: ['#2B303B', '#11141A', '#FFB547', '#8E97A8']
+    }
+  };
+  const STATE_NAMES = { idle: 'Обычный', happy: 'Радость', sleep: 'Сон', work: 'Работает' };
+
+  const style = document.createElement('style');
+  style.textContent = Pets.CSS;
+  document.head.appendChild(style);
+
+  let current = 'idle';
+  const grid = document.getElementById('grid');
+
+  for (const pet of Pets.PETS) {
+    const i = INFO[pet.id];
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="stage" data-pet="${pet.id}">${Pets.render(pet.id, current)}</div>
+      <div class="body">
+        <div class="name"><h2>${i.name}</h2><span>${i.tag}</span></div>
+        <p>${i.text}</p>
+        <div class="states">${Pets.STATES.map((s) => `<figure>${Pets.render(pet.id, s)}<figcaption>${STATE_NAMES[s]}</figcaption></figure>`).join('')}</div>
+        <dl><dt>Плюс</dt><dd>${i.plus}</dd><dt>Риск</dt><dd>${i.risk}</dd></dl>
+        <div class="palette">${i.palette.map((c) => `<i style="background:${c}" title="${c}"></i>`).join('')}</div>
+      </div>`;
+    grid.appendChild(card);
+  }
+
+  function renderStages(state) {
+    document.querySelectorAll('.stage').forEach((el) => { el.innerHTML = Pets.render(el.dataset.pet, state); });
+  }
+
+  function bindSeg(id, onPick) {
+    const seg = document.getElementById(id);
+    seg.addEventListener('click', (e) => {
+      const b = e.target.closest('button');
+      if (!b) return;
+      seg.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      onPick(b.dataset.v);
+    });
+  }
+  bindSeg('state-seg', (v) => { current = v; renderStages(v); });
+  bindSeg('stage-seg', (v) => { document.body.dataset.stage = v; });
+
+  // Клик по питомцу: короткая радость, потом возврат в выбранное состояние.
+  grid.addEventListener('click', (e) => {
+    const stage = e.target.closest('.stage');
+    if (!stage) return;
+    stage.innerHTML = Pets.render(stage.dataset.pet, 'happy');
+    clearTimeout(stage._t);
+    stage._t = setTimeout(() => { stage.innerHTML = Pets.render(stage.dataset.pet, current); }, 1400);
+  });
+</script>
+</body>
+</html>

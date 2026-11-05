@@ -1,0 +1,9 @@
+.build/
+build/
+.DS_Store
+*.dmg
+
+# Внутренние документы процесса: наружу не едут (как в Trunook).
+ИДЕИ.md
+PUBLISH.md
+RELEASE.md

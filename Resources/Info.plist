@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>ru</string>
+	<key>CFBundleDisplayName</key>
+	<string>MyPetBit</string>
+	<key>CFBundleExecutable</key>
+	<string>MyPetBit</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.trudevlab.mypetbit</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>ru</string>
+		<string>en</string>
+		<string>zh-Hans</string>
+	</array>
+	<key>CFBundleName</key>
+	<string>MyPetBit</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.0.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>14.0</string>
+	<key>LSUIElement</key>
+	<true/>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>Кнопка «Открыть» в облачке Бита переключает Терминал или iTerm на вкладку, где закончилась команда. По вашей просьбе Бит расставляет значки на рабочем столе через Finder.</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>Бит напоминает о встречах за 5 минут и в момент начала и даёт подключиться по ссылке из события.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Бит напоминает о встречах за 5 минут и в момент начала и даёт подключиться по ссылке из события.</string>
+</dict>
+</plist>

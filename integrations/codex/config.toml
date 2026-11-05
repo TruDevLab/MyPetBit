@@ -1,0 +1,2 @@
+# Добавить в ~/.codex/config.toml. Codex сообщает только о конце ответа.
+notify = ["/Applications/MyPetBit.app/Contents/MacOS/MyPetBit", "--agent-hook", "codex"]

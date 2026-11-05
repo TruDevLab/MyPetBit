@@ -1,0 +1,7 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [{ "hooks": [{ "type": "command", "command": "/Applications/MyPetBit.app/Contents/MacOS/MyPetBit --agent-hook claude", "timeout": 5 }] }],
+    "Stop":             [{ "hooks": [{ "type": "command", "command": "/Applications/MyPetBit.app/Contents/MacOS/MyPetBit --agent-hook claude", "timeout": 5 }] }],
+    "Notification":     [{ "hooks": [{ "type": "command", "command": "/Applications/MyPetBit.app/Contents/MacOS/MyPetBit --agent-hook claude", "timeout": 5 }] }]
+  }
+}

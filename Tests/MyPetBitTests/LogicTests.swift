@@ -397,6 +397,11 @@ struct ConverterTests {
         (ConvertEngine.keynote, "pdf"), (.keynote, "pptx"), (.pages, "docx"), (.pages, "epub"), (.numbers, "xlsx")
     ])
     func iWork(_ engine: ConvertEngine, _ ext: String) throws {
+        // Слова вроде «Microsoft PowerPoint» osacompile знает только из словаря установленного приложения:
+        // на машине без iWork (сборка на GitHub) проверять нечего.
+        let ids: [ConvertEngine: String] = [.keynote: "com.apple.iWork.Keynote", .pages: "com.apple.iWork.Pages",
+                                            .numbers: "com.apple.iWork.Numbers"]
+        guard let id = ids[engine], NSWorkspace.shared.urlForApplication(withBundleIdentifier: id) != nil else { return }
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/usr/bin/osacompile")
         let out = FileManager.default.temporaryDirectory.appendingPathComponent("mypetbit-\(UUID().uuidString).scpt")
